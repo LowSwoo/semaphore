@@ -1,7 +1,8 @@
 # Модель данных
 
 `WorkflowNode` - это сущность с необязательными параметрами, которые задаются при создании. 
-Имеет смысл изменить поведение таким образом, чтобы у каждого конкретного узла была своя роль
+Имеет смысл изменить поведение таким образом, чтобы у каждого конкретного узла была своя роль.
+При таком рефакторе мы сможем на стороне модели данных (шаблонов) определять обязательные и не обязательные поля для каждого узла. (Это первое преимущество, что обнаружил, лежит на поверхности)
 
 ## Примечания
 
@@ -82,28 +83,28 @@ type WorkflowTaskNode struct {
 	TemplateID      int 
 	Kind            WorkflowNodeKind
 	ConvergenceMode WorkflowConvergenceMode 
-	TaskParamsID    *int                       
-	TaskParams      *TaskParams                
+	TaskParamsID    int                       
+	TaskParams      TaskParams                
 }
 
 type WorkflowApprovalNode struct {
     WorkflowNode
 
-	ApprovalTimeout *int                    
-	ApprovalMessage *string
+	ApprovalTimeout int                    
+	ApprovalMessage string
 
 }
 
 type WorkflowNoteNode struct {
     WorkflowNode
 
-    Note *string
+    Note string
 }
 
 type WorkflowDelayNode struct {
     WorkflowNode
 
-	DelaySeconds *int                       
+	DelaySeconds int                       
 
 }
 
